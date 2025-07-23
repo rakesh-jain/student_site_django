@@ -1,0 +1,25 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environments (ignore if your venv is inside project)
+venv/
+env/
+myenv/
+.venv/
+
+# Django-specific files
+db.sqlite3
+*.log
+staticfiles/
+media/
+local_settings.py
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ignore config secrets
+mysql.cnf
