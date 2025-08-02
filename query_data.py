@@ -59,8 +59,13 @@ def a_plus_students():
     students = Students.objects.filter(activities__grade ='A+')
     for s in students:
         print(s)
+def get_rakeshData():
+    student = Students.objects.get(last_name = 'Jain')
+    activity = student.activities.all()
+    for act in activity:
+        print(act)
 
 if __name__ == "__main__":
-    a_plus_students()
+    get_rakeshData()
     
     

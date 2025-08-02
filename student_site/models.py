@@ -1,9 +1,5 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Choices
 COUNTRY_CHOICES = [
@@ -43,13 +39,39 @@ ACTIVITY_CHOICES = [
     ('literature', 'Literary Club'),
 ]
 
+GENDER_CHOICE = [
+    ('Male','Male'),
+    ('Female','Female'),
+    ('Other','Other')
+    
+]
+
+BLOOD_GROUP_CHOICES = [
+        ('A+', 'A+'),
+        ('A-', 'A-'),
+        ('B+', 'B+'),
+        ('B-', 'B-'),
+        ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
+        ('O+', 'O+'),
+        ('O-', 'O-'),
+    ]
+
 class Students(models.Model):
     student_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     std_class = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(12)])
     email = models.EmailField(null=False, unique=True, default='')
-    phone_number = PhoneNumberField(null=False, blank=False,unique=True,default='+911234567890')
+    phone_number = models.CharField(max_length=15,null = False , unique = True)
+    dob = models.DateField(blank=True, null=True)
+    blood_group = models.CharField(
+        max_length=3, 
+        choices=BLOOD_GROUP_CHOICES, 
+        null=True, 
+        blank=True,
+        help_text="Select your blood group"
+    )
     
     class Meta:
         db_table = "Students"
@@ -82,6 +104,6 @@ class Address(models.Model):
     
     class Meta:
         db_table = "Address"
-
+  
     def __str__(self):
         return f"{self.house_no}, {self.street}, {self.city}, {self.get_state_display()}, {self.get_country_display()}"
