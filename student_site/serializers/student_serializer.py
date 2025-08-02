@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from student_site.models import Students,ExtraCurricular,Address
+from myenv.myproject.student_site.models.models import Students,ExtraCurricular,Address
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:

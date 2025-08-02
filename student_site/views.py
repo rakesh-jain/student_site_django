@@ -1,5 +1,5 @@
 from rest_framework import generics
-from student_site.models import Students,Address,ExtraCurricular
+from myenv.myproject.student_site.models.models import Students,Address,ExtraCurricular
 from student_site.serializers.student_serializer import StudentSerializer,AddressSerializer,ExtraCurricularSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -154,11 +154,18 @@ from rest_framework.parsers import JSONParser
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Students.objects.all().select_related('address').prefetch_related('activities')
     serializer_class = StudentSerializer
+    
     # parser_classes = [JSONParser]  default it json we can specify the parse class 
-    from rest_framework.parsers import FileUploadParser,MultiPartParser
-    parser_classes = [FileUploadParser] # it tells the request allows only the file content 
-    parser_classes  = [MultiPartParser] # multi part parser to process the html type docs 
-    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+    # from rest_framework.parsers import FileUploadParser,MultiPartParser
+    # parser_classes = [FileUploadParser] # it tells the request allows only the file content 
+    # parser_classes  = [MultiPartParser] # multi part parser to process the html type docs 
+    # filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+    '''
+    in the previous means above code tells actually what should we catch(request type)
+    in the below code shows the what should u send back means response back we call it as render 
+    '''
+    from rest_framework.renderers import HTMLFormRenderer,JSONRenderer,MultiPartRenderer,TemplateHTMLRenderer
+    render_class  = 
     
     def get_queryset(self):
         queryset = super().get_queryset()
